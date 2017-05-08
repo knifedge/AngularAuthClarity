@@ -28,8 +28,10 @@ export class LoginComponent implements OnInit {
   onSubmit(form){}
 
   loginWithGoogle(){
-    this.authService.loginWithGoogle();
-    this.router.navigate(['home']);
+    this.authService.loginWithGoogle().then((data)=>{
+      this.router.navigate(['home']);
+    });
+    
   }
 
   ngOnInit() {

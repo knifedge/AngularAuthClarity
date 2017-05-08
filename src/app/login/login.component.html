@@ -1,6 +1,5 @@
 <div class="login-wrapper">
     <form class="login" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" [hidden]="submitted">
-
         <div class="login-group">
 
             <input class="username" type="text" id="login_username" formControlName="username" placeholder="Username">
@@ -12,9 +11,9 @@
                     Remember me
                 </label>
             </div>
-            <button type="submit" class="btn btn-primary">LOG IN</button>
-            <button type="submit" class="btn btn-success"><a routerLink="/register" routerLinkActive="active">REGISTER</a></button>
-            <button type="submit" (click)="loginWithGoogle()" class=" btn btn-danger ">LOG IN WITH GOOGLE</button>
+            <div><button type="submit" class="btn btn-primary">LOG IN</button></div>
+            <a routerLink="/register" routerLinkActive="active"><button type="submit" class="btn btn-success">REGISTER</button></a>
+            <div><button type="submit" (click)="loginWithGoogle()" class=" btn btn-danger ">LOG IN WITH GOOGLE</button></div>
         </div>
     </form>
 </div>

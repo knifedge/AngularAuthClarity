@@ -16,11 +16,10 @@ export class AuthService {
   loginUser(email,password){
    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){ console.log(error) })
   }
-
-  loginWithGoogle(){
-      this.Auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
   
+  loginWithGoogle(){
+     return this.Auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+  }
 
   logout() {
       this.Auth.auth.signOut();
