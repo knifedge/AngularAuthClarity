@@ -7,7 +7,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 
+import { RouterModule, Routes }   from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { RegisterComponent } from './register/register.component';
+import { HeaderComponent } from './header/header.component';
 
 
 export const firebaseConfig = {
@@ -15,20 +19,30 @@ export const firebaseConfig = {
   authDomain: 'clarityangular.firebaseapp.com'
 };
 
+const routes:Routes = [
+  {path:'',redirectTo:'/login',pathMatch:'full'},
+  {path:'login',component:LoginComponent},
+  {path:'home',component:HomeComponent},
+  {path:'register',component:RegisterComponent}
+]
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

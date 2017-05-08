@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from "@angular/forms";
+import { AuthService } from '../auth.service';
+import { ActivatedRoute, Params }   from '@angular/router';
 import 'clarity-icons';
 import 'clarity-icons/shapes/essential-shapes';
-
-import { Observable } from 'rxjs/Observable';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app'
-
-
-declare var Auth0Lock:any;
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [AngularFireAuth]
+  providers:[AuthService]
 })
 
 export class LoginComponent implements OnInit {
@@ -26,17 +22,14 @@ export class LoginComponent implements OnInit {
   
   submitted = false;
 
-  user: Observable<firebase.User>;
-  constructor(public afAuth: AngularFireAuth) { 
-    this.user = afAuth.authState;
-  }
-
-  onSubmit(form){
-    // this.auth.login(form.value.username ,form.value.password );
-  }
+  constructor(private authService : AuthService,private router : Router){  }
+  user = {}
+  
+  onSubmit(form){}
 
   loginWithGoogle(){
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.authService.loginWithGoogle();
+    this.router.navigate(['home']);
   }
 
   ngOnInit() {
@@ -44,7 +37,6 @@ export class LoginComponent implements OnInit {
       username: new FormControl('', Validators.required),
       password: new FormControl('',Validators.required)
     })
-
   }
 
 }
